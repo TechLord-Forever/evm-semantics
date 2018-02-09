@@ -247,6 +247,9 @@
       <activeAccounts>
         7 |-> false
       </activeAccounts>
+      <touchedAccounts>
+        .Set
+      </touchedAccounts>
       <accounts>
         AccountCellMapItem ( <acctID>
           7

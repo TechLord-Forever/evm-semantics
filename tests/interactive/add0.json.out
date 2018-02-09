@@ -162,6 +162,9 @@
         87579061662017136990230301793909925042452127430 |-> false
         244687034288125203496486448490407391986876152250 |-> true
       </activeAccounts>
+      <touchedAccounts>
+        .Set
+      </touchedAccounts>
       <accounts>
         AccountCellMapItem ( <acctID>
           87579061662017136990230301793909925042452127430

@@ -113,6 +113,7 @@ In the comments next to each cell, we've marked which component of the YellowPap
                       // ---------------
 
                       <activeAccounts> .Map </activeAccounts>
+                      <touchedAccounts> .Set </touchedAccounts>
                       <accounts>
 ```
 
@@ -1459,6 +1460,7 @@ The various `CALL*` (and other inter-contract control flow) operations will be d
          <program> _ => CODE </program>
          <programBytes> _ => BYTES </programBytes>
          <static> OLDSTATIC:Bool => OLDSTATIC orBool STATIC </static>
+         <touchedAccounts> ... .Set => SetItem(ACCTFROM) SetItem(ACCTTO) ... </touchedAccounts>
 
     syntax KItem ::= "#initVM"
  // --------------------------
@@ -1631,6 +1633,7 @@ For each `CALL*` operation, we make a corresponding call to `#call` and a state-
            ...
          </account>
          <activeAccounts> ... ACCTTO |-> (EMPTY => #if Gemptyisnonexistent << SCHED >> #then false #else EMPTY #fi) ... </activeAccounts>
+         <touchedAccounts> ... .Set => SetItem(ACCTFROM) SetItem(ACCTTO) ... </touchedAccounts>
 
     syntax KItem ::= "#codeDeposit" Int
                    | "#mkCodeDeposit" Int
@@ -1725,6 +1728,7 @@ Self destructing to yourself, unlike a regular transfer, destroys the balance in
            ...
          </account>
          <output> _ => .WordStack </output>
+         <touchedAccounts> ... .Set => SetItem(ACCT) SetItem(ACCTTO) ... </touchedAccounts>
       requires ACCT =/=Int ACCTTO
 
     rule <k> SELFDESTRUCT ACCT => #end ... </k>
@@ -1741,6 +1745,7 @@ Self destructing to yourself, unlike a regular transfer, destroys the balance in
          </account>
          <activeAccounts> ... ACCT |-> (_ => NONCE ==Int 0 andBool CODE ==K .WordStack) ... </activeAccounts>
          <output> _ => .WordStack </output>
+         <touchedAccounts> ... .Set => SetItem(ACCT) ... </touchedAccounts>
 
 ```
 

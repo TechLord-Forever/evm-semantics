@@ -149,6 +149,9 @@
       <activeAccounts>
         .Map
       </activeAccounts>
+      <touchedAccounts>
+        .Set
+      </touchedAccounts>
       <accounts>
         .AccountCellMap
       </accounts>
